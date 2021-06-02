@@ -5,6 +5,7 @@ import express from 'express';
 import cors from 'cors';
 import cookieparser from 'cookie-parser';
 import morgan from 'morgan';
+import routes from './routes/index'
 
 //Middleware
 const app = express();
@@ -14,9 +15,10 @@ app.use(morgan('dev'));
 app.use(cookieparser());
 
 //Routing
-app.get('/', (req,res) =>{
-    res.json({msg: "Testing"})
-})
+app.use('/api', routes.authRouter)
+
+//Database
+import './config/database'
 
 //Server entry point
 const PORT = process.env.PORT || 5000
